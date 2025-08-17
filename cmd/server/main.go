@@ -1,16 +1,13 @@
 package main
 
-import (
-	"github.com/gofiber/fiber/v2"
-	"log"
-)
+import "github.com/olukkas/ushort/internal"
 
 func main() {
-	app := fiber.New()
+	app := internal.NewApp()
+	app.Init()
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World!")
-	})
-
-	log.Fatal(app.Listen(":3000"))
+	err := app.Close()
+	if err != nil {
+		panic(err.Error())
+	}
 }
