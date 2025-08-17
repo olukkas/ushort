@@ -1,0 +1,19 @@
+package templates
+
+templ Layout() {
+    <!DOCTYPE html>
+    <html lang="pt-br">
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>uShort</title>
+            <script defer src="/static/js/htmx.min.js"></script>
+            <link href="/static/css/output.css" rel="stylesheet" />
+        </head>
+        <body class="bg-gray-100">
+            <div class="container mx-auto p-6">
+                { children... }
+            </div>
+        </body>
+    </html>
+}
