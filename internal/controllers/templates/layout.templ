@@ -1,0 +1,21 @@
+package templates
+
+import "github.com/a-h/templ"
+
+templ Layout(content templ.Component) {
+    <!DOCTYPE html>
+    <html lang="pt-br">
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>uShort</title>
+            <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+            <link href="/static/css/output.css" rel="stylesheet" />
+        </head>
+        <body class="bg-gray-100">
+            <div class="container mx-auto p-6">
+                @content
+            </div>
+        </body>
+    </html>
+}

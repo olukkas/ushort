@@ -1,0 +1,36 @@
+{
+  "name": "ushort",
+  "version": "1.0.0",
+  "description": "an url shortener in Golang",
+  "scripts": {
+    "tailwind:build": "npx @tailwindcss/cli -i ./static/css/tailwind.css -o ./static/css/output.css",
+    "tailwind:watch": "npx @tailwindcss/cli -i ./static/css/tailwind.css -o ./static/css/output.css --watch",
+    "templ:build": "templ generate",
+    "dev": "npm-run-all --parallel tailwind:watch templ:build go:run",
+    "build": "npx npm-run-all tailwind:build templ:build",
+    "go:run": "go run ./cmd/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olukkas/ushort.git"
+  },
+  "keywords": [
+    "url",
+    "shortener",
+    "golang",
+    "web"
+  ],
+  "author": "Lucas Martins dos Santos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/olukkas/ushort/issues"
+  },
+  "homepage": "https://github.com/olukkas/ushort#readme",
+  "devDependencies": {
+    "npm-run-path": "^6.0.0",
+    "tailwindcss": "^4.1.12"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.12"
+  }
+}
