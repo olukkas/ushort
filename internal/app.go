@@ -46,6 +46,7 @@ func (a *App) setupRoutes() {
 	a.server.Use(logger.New())
 
 	a.server.Get("/", controllers.HelloRoute)
+	a.server.Static("/static", "./static")
 }
 
 func (a *App) setupDb() {
