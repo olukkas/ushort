@@ -1,0 +1,14 @@
+package templates
+
+templ SuccessMessage(shortUrl string) {
+	<div class="px-4 rounded bg-green-100 text-green-800 mt-2">
+		✅ Sua URL encurtada:
+		<a href={ shortUrl } class="font-bold underline" target="_blank">{ shortUrl }</a>
+	</div>
+}
+
+templ ErrorMessage(msg string) {
+	<div class="p-4 rounded bg-red-100 text-red-800 mt-2">
+		❌ { msg }
+	</div>
+}

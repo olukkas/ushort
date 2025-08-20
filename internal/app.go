@@ -7,13 +7,15 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/olukkas/ushort/internal/controllers"
+	"github.com/olukkas/ushort/internal/repositories"
 	"log"
 	"os"
 )
 
 type App struct {
-	server   *fiber.App
-	database *sql.DB
+	server        *fiber.App
+	database      *sql.DB
+	urlController *controllers.UrlController
 }
 
 func NewApp() *App {
@@ -22,6 +24,7 @@ func NewApp() *App {
 
 func (a *App) Init() {
 	a.setupDb()
+	a.setupControllers()
 	a.setupRoutes()
 
 	port, ok := os.LookupEnv("PORT")
@@ -46,7 +49,14 @@ func (a *App) setupRoutes() {
 	a.server.Use(logger.New())
 
 	a.server.Get("/", controllers.HelloRoute)
+	a.server.Post("/shorten", a.urlController.Shorten)
+
 	a.server.Static("/static", "./static")
+}
+
+func (a *App) setupControllers() {
+	urlRepo := repositories.NewUrlRepository(a.database)
+	a.urlController = controllers.NewUrlController(urlRepo)
 }
 
 func (a *App) setupDb() {
