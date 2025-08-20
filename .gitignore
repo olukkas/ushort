@@ -2,3 +2,10 @@
 .env
 database.db
 node_modules
+
+# Tailwind build
+/static/css/output.css
+
+# Templ generated files
+*_templ.go
+
