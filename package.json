@@ -6,7 +6,7 @@
     "tailwind:build": "npx @tailwindcss/cli -i ./static/css/tailwind.css -o ./static/css/output.css",
     "tailwind:watch": "npx @tailwindcss/cli -i ./static/css/tailwind.css -o ./static/css/output.css --watch",
     "templ:build": "templ generate",
-    "dev": "npm-run-all --parallel tailwind:watch templ:build go:run",
+    "dev": "npx npm-run-all --parallel tailwind:build templ:build go:run",
     "build": "npx npm-run-all tailwind:build templ:build",
     "go:run": "go run ./cmd/server"
   },
