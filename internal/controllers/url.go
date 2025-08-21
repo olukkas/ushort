@@ -1,10 +1,11 @@
 package controllers
 
 import (
+	"net/url"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/olukkas/ushort/internal/controllers/templates"
 	"github.com/olukkas/ushort/internal/repositories"
-	"net/url"
 )
 
 type UrlController struct {
@@ -23,7 +24,6 @@ func (u *UrlController) Shorten(ctx *fiber.Ctx) error {
 
 	_, err := url.ParseRequestURI(longUrl)
 	if err != nil {
-		ctx.Status(fiber.StatusBadRequest)
 		return templates.ErrorMessage("Url inválida").
 			Render(ctx.Context(), responseWriter)
 	}
@@ -31,7 +31,6 @@ func (u *UrlController) Shorten(ctx *fiber.Ctx) error {
 	entity := repositories.NewURL(longUrl)
 	newUrl, err := u.urlRepo.Save(entity)
 	if err != nil {
-		ctx.Status(fiber.StatusInternalServerError)
 		return templates.ErrorMessage(err.Error()).Render(ctx.Context(), responseWriter)
 	}
 
