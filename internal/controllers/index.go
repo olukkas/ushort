@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"bytes"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/olukkas/ushort/internal/controllers/templates"
 )

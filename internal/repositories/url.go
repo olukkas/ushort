@@ -1,8 +1,9 @@
 package repositories
 
 import (
+	"crypto/rand"
 	"database/sql"
-	"math/rand"
+	"math/big"
 	"time"
 )
 
@@ -14,18 +15,25 @@ type URL struct {
 	ExpireAt    time.Time
 }
 
+//goland:noinspection SpellCheckingInspection
+var slugChars = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
+
 func NewURL(originalUrl string) *URL {
-	slug := generateSlug(10)
+	slug, _ := generateSlug(10)
 	return &URL{Slug: slug, OriginalUrl: originalUrl}
 }
 
-func generateSlug(n int) string {
-	letters := []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
+func generateSlug(n int) (string, error) {
 	b := make([]rune, n)
 	for i := range b {
-		b[i] = letters[rand.Intn(len(letters))]
+		num, err := rand.Int(rand.Reader, big.NewInt(int64(len(slugChars))))
+		if err != nil {
+			return "", err
+		}
+		b[i] = slugChars[num.Int64()]
 	}
-	return string(b)
+
+	return string(b), nil
 }
 
 type UrlRepository struct {
