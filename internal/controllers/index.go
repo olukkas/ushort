@@ -2,8 +2,9 @@ package controllers
 
 import (
 	"bytes"
+
 	"github.com/gofiber/fiber/v2"
-	"github.com/olukkas/ushort/internal/controllers/templates"
+	"github.com/olukkas/ushort/internal/templates"
 )
 
 func HelloRoute(c *fiber.Ctx) error {

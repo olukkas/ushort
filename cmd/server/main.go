@@ -1,9 +1,10 @@
 package main
 
 import (
+	"log/slog"
+
 	"github.com/joho/godotenv"
 	"github.com/olukkas/ushort/internal"
-	"log/slog"
 )
 
 func main() {
@@ -13,7 +14,7 @@ func main() {
 
 	app := internal.NewApp()
 	app.Init()
-  
+
 	err := app.Close()
 	if err != nil {
 		panic(err.Error())
