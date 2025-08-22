@@ -8,9 +8,9 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
-	_ "github.com/mattn/go-sqlite3"
 	"github.com/olukkas/ushort/internal/controllers"
 	"github.com/olukkas/ushort/internal/repositories"
+	_ "modernc.org/sqlite"
 )
 
 type App struct {
@@ -66,7 +66,7 @@ func (a *App) setupDb() {
 		log.Fatal("DB_NAME environment variable not set")
 	}
 
-	db, err := sql.Open("sqlite3", dbName)
+	db, err := sql.Open("sqlite", dbName)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
