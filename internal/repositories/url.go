@@ -12,7 +12,7 @@ type URL struct {
 	Slug        string
 	OriginalUrl string
 	CreatedAt   time.Time
-	ExpireAt    time.Time
+	ExpireAt    *time.Time
 }
 
 //goland:noinspection SpellCheckingInspection
@@ -20,7 +20,7 @@ var slugChars = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123
 
 func NewURL(originalUrl string) *URL {
 	slug, _ := generateSlug(10)
-	return &URL{Slug: slug, OriginalUrl: originalUrl}
+	return &URL{Slug: slug, OriginalUrl: originalUrl, CreatedAt: time.Now()}
 }
 
 func generateSlug(n int) (string, error) {
@@ -48,7 +48,7 @@ func (r *UrlRepository) Save(model *URL) (*URL, error) {
 	var err error
 	var result sql.Result
 
-	if model.ExpireAt.IsZero() {
+	if model.ExpireAt == nil {
 		result, err = r.db.Exec(
 			"INSERT INTO urls (slug, original_url) VALUES (?, ?)",
 			model.Slug, model.OriginalUrl,
