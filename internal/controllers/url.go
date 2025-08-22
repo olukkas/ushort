@@ -4,8 +4,8 @@ import (
 	"net/url"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/olukkas/ushort/internal/controllers/templates"
 	"github.com/olukkas/ushort/internal/repositories"
+	"github.com/olukkas/ushort/internal/templates"
 )
 
 type UrlController struct {
