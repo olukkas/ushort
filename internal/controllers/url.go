@@ -34,5 +34,5 @@ func (u *UrlController) Shorten(ctx *fiber.Ctx) error {
 		return templates.ErrorMessage(err.Error()).Render(ctx.Context(), responseWriter)
 	}
 
-	return templates.SuccessMessage(newUrl.Slug).Render(ctx.Context(), responseWriter)
+	return templates.SuccessMessage(ctx.BaseURL()+"/"+newUrl.Slug).Render(ctx.Context(), responseWriter)
 }
