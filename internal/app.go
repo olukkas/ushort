@@ -51,6 +51,7 @@ func (a *App) setupRoutes() {
 
 	a.server.Get("/", controllers.HelloRoute)
 	a.server.Post("/shorten", a.urlController.Shorten)
+	a.server.Get("/:slug", a.urlController.Redirect)
 
 	a.server.Static("/static", "./static")
 }
