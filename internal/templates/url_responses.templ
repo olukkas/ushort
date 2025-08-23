@@ -1,10 +1,30 @@
 package templates
 
 templ SuccessMessage(shortUrl string) {
-	<div class="px-4 rounded bg-green-100 text-green-800 mt-2">
-		✅ Sua URL encurtada:
-		<a href={ shortUrl } class="font-bold underline" target="_blank">{ shortUrl }</a>
+	<div class="px-4 rounded bg-green-100 text-green-800 mt-2 flex items-center">
+		<div>
+			✅ Sua URL encurtada:
+			<a href={ shortUrl } class="font-bold underline" target="_blank">{ shortUrl }</a>
+		</div>
+		<button
+			data-url={ shortUrl }
+			class="ml-4 px-3 py-1 bg-green-600 text-white rounded-lg hover:bg-green-700 transition copy-btn"
+		>
+			Copiar
+		</button>
 	</div>
+	<script>
+        document.addEventListener("click", function(e) {
+            if (e.target.classList.contains("copy-btn")) {
+                const url = e.target.getAttribute("data-url");
+                navigator.clipboard.writeText(url).then(() => {
+                    const originalText = e.target.innerText;
+                    e.target.innerText = "Copiado!";
+                    setTimeout(() => e.target.innerText = originalText, 1500);
+                });
+            }
+        });
+    </script>
 }
 
 templ ErrorMessage(msg string) {
