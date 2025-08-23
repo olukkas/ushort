@@ -36,3 +36,14 @@ func (u *UrlController) Shorten(ctx *fiber.Ctx) error {
 
 	return templates.SuccessMessage(ctx.BaseURL()+"/"+newUrl.Slug).Render(ctx.Context(), responseWriter)
 }
+
+func (u *UrlController) Redirect(ctx *fiber.Ctx) error {
+	slug := ctx.Params("slug")
+
+	foundUrl, err := u.urlRepo.GetBySlug(slug)
+	if err != nil {
+		return ctx.Status(404).JSON(fiber.Map{"message": "foundUrl not found for slug: " + slug})
+	}
+
+	return ctx.Redirect(foundUrl.OriginalUrl)
+}

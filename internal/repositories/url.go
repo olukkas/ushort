@@ -80,3 +80,17 @@ func (r *UrlRepository) Save(model *URL) (*URL, error) {
 
 	return &url, nil
 }
+
+func (r *UrlRepository) GetBySlug(slug string) (*URL, error) {
+	query := `SELECT id, slug, original_url, created_at, expires_at FROM urls WHERE slug = ?`
+
+	var url URL
+	err := r.db.QueryRow(query, slug).
+		Scan(&url.ID, &url.Slug, &url.OriginalUrl, &url.CreatedAt, &url.ExpireAt)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &url, nil
+}
